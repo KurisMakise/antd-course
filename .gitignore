@@ -1,0 +1,6 @@
+# Created by .ignore support plugin (hsz.mobi)
+/node_modules/
+/src/page/.umi/
+/src/page/.umi-production/
+/.idea/
+*.iml
