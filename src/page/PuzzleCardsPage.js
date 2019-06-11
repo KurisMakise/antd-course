@@ -11,20 +11,32 @@ const mapStateTopProps = (state) => {
     };
 };
 
+// const mapDispatchToProps = (dispatch) => {
+//     return {
+//         onClickAdd: (newCard) => {
+//             const action = {
+//                 type: `${namespace}/queryInitCards`,
+//                 payload: newCard,
+//             };
+//             dispatch(action);
+//         },
+//     };
+// };
 const mapDispatchToProps = (dispatch) => {
     return {
-        onClickAdd: (newCard) => {
-            const action = {
+        onDidMount: () => {
+            dispatch({
                 type: `${namespace}/queryInitCards`,
-                payload: newCard,
-            };
-            dispatch(action);
-        },
+            })
+        }
     };
 };
-
 @connect(mapStateTopProps, mapDispatchToProps)
 export default class PuzzleCardsPage extends Component {
+    componentDidMount() {
+        this.props.onDidMount();
+    }
+
     render() {
         return (
             <div>
@@ -52,37 +64,4 @@ export default class PuzzleCardsPage extends Component {
             </div>
         );
     }
-
-    // constructor(props) {
-    //     super(props);
-    //     this.counter = 100;
-    //     this.state = {
-    //         cardList: [
-    //             {
-    //                 id: 1,
-    //                 setup: 'Did you hear about hte two silk worms in a race?',
-    //                 punchline: 'It ended in a tie',
-    //             },
-    //             {
-    //                 id: 2,
-    //                 setup: 'What happens to a frog car when it breaks down?',
-    //                 punchline: 'It gets toad away',
-    //             },
-    //         ],
-    //     }
-    // }
-    // addNewCart = () => {
-    //     this.setState(state => {
-    //         const prevCardList = state.cardList;
-    //         this.counter++;
-    //         const card = {
-    //             id: this.counter,
-    //             setup: '这个怎么样？',
-    //             punchline: '还是很不错的'
-    //         };
-    //         return {
-    //             cardList: prevCardList.concat(card),
-    //         };
-    //     });
-    // };
 }

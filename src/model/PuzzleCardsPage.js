@@ -1,4 +1,5 @@
 import request from '../util/request';
+import {message} from 'antd';
 
 const delay = (millisecond) => {
     return new Promise((resolve => {
@@ -24,17 +25,20 @@ export default {
     },
     effects: {
         * queryInitCards(_, sagaEffects) {
-            debugger
-            const {call, put} = sagaEffects;
-            const endPointURI = 'https://safe-falls-22549.herokuapp.com/random_jokex';
+            try {
+                const {call, put} = sagaEffects;
+                const endPointURI = '/dev/random_joke';
 
-            const puzzle = yield call(request, endPointURI);
-            yield put({type: 'addNewCard', payload: puzzle});
+                const puzzle = yield call(request, endPointURI);
+                yield put({type: 'addNewCard', payload: puzzle});
 
-            yield call(delay, 3000);
+                yield call(delay, 3000);
 
-            const puzzle2 = yield call(request, endPointURI);
-            yield put({type: 'addNewCard', payload: puzzle2});
+                const puzzle2 = yield call(request, endPointURI);
+                yield put({type: 'addNewCard', payload: puzzle2});
+            } catch (e) {
+                message.error('捕获数据失败');
+            }
         }
     },
     reducers: {
