@@ -9,18 +9,7 @@ const delay = (millisecond) => {
 export default {
     namespace: 'puzzleCards',
     state: {
-        data: [
-            {
-                id: 1,
-                setup: '好看吗？',
-                punchline: '不好看',
-            },
-            {
-                id: 2,
-                setup: '真好看！',
-                punchline: "我也这么认为",
-            },
-        ],
+        data: [],
         counter: 100,
     },
     effects: {
@@ -28,11 +17,10 @@ export default {
             try {
                 const {call, put} = sagaEffects;
                 const endPointURI = '/dev/random_joke';
+                yield put({type: 'init'});
 
                 const puzzle = yield call(request, endPointURI);
                 yield put({type: 'addNewCard', payload: puzzle});
-
-                yield call(delay, 3000);
 
                 const puzzle2 = yield call(request, endPointURI);
                 yield put({type: 'addNewCard', payload: puzzle2});
@@ -49,6 +37,12 @@ export default {
             return {
                 data: nextData,
                 counter: nextCounter,
+            }
+        },
+        init() {
+            return {
+                data: [],
+                counter: 1,
             }
         }
     }

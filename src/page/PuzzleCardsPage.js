@@ -11,17 +11,6 @@ const mapStateTopProps = (state) => {
     };
 };
 
-// const mapDispatchToProps = (dispatch) => {
-//     return {
-//         onClickAdd: (newCard) => {
-//             const action = {
-//                 type: `${namespace}/queryInitCards`,
-//                 payload: newCard,
-//             };
-//             dispatch(action);
-//         },
-//     };
-// };
 const mapDispatchToProps = (dispatch) => {
     return {
         onDidMount: () => {
@@ -36,7 +25,6 @@ export default class PuzzleCardsPage extends Component {
     componentDidMount() {
         this.props.onDidMount();
     }
-
     render() {
         return (
             <div>
@@ -54,14 +42,26 @@ export default class PuzzleCardsPage extends Component {
                         }
                     )
                 }
-                <div>
-                    <button onClick={() => this.props.onClickAdd({
-                        setup: 'good good study',
-                        punchline: 'day day up',
-                    })}>添加卡片
-                    </button>
-                </div>
+                {/*<div>*/}
+                {/*    <button onClick={() => this.props.onClickAdd({*/}
+                {/*        setup: 'good good study',*/}
+                {/*        punchline: 'day day up',*/}
+                {/*    })}>添加卡片*/}
+                {/*    </button>*/}
+                {/*</div>*/}
             </div>
         );
     }
 }
+
+// const mapDispatchToProps = (dispatch) => {
+//     return {
+//         onClickAdd: (newCard) => {
+//             const action = {
+//                 type: `${namespace}/queryInitCards`,
+//                 payload: newCard,
+//             };
+//             dispatch(action);
+//         },
+//     };
+// };

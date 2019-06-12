@@ -4,12 +4,8 @@ export default {
         path: "/",
         component: "../layout",
         routes: [
-            {
-                path: '/', component: './HelloWorld'
-            },
-            {
-                path: '/HelloWorld', component: 'HelloWorld'
-            },
+            {path: '/', component: './HelloWorld'},
+            {path: '/HelloWorld', component: 'HelloWorld'},
             {
                 path: '/dashboard/',
                 routes: [
@@ -18,18 +14,14 @@ export default {
                     {path: '/dashboard/workplace', component: 'dashboard/workplace'}
                 ]
             },
-            {
-                path: '/puzzleCards', component: 'PuzzleCardsPage'
-            }
+            {path: '/puzzleCards', component: 'PuzzleCardsPage'},
+            {path: 'list', component: 'list'}
         ]
     }],
     plugins: [
         ['umi-plugin-react', {
             antd: true,
             dva: true,
-            locale: {
-                enable: true,
-            },
         }]
     ],
 };
