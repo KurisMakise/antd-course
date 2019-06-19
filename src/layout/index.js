@@ -21,6 +21,7 @@ export default class BasicLayout extends Component {
                         </Menu.Item>
                         <SubMenu
                             key="sub1"
+
                             title={<span><Icon type="dashboard"/><span>Dashboard</span></span>}
                         >
                             <Menu.Item key="2"><Link to={"/dashboard/analysis"}>分析页</Link></Menu.Item>

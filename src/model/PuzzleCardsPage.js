@@ -21,7 +21,6 @@ export default {
 
                 const puzzle = yield call(request, endPointURI);
                 yield put({type: 'addNewCard', payload: puzzle});
-
                 const puzzle2 = yield call(request, endPointURI);
                 yield put({type: 'addNewCard', payload: puzzle2});
             } catch (e) {

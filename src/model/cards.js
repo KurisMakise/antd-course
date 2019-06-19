@@ -1,4 +1,4 @@
-import request from '../util/request';
+import * as cardsService from '../service/cards';
 
 const delay = (millisecond) => {
     return new Promise((resolve) => {
@@ -7,42 +7,57 @@ const delay = (millisecond) => {
 };
 export default {
     namespace: 'cards',
+
     state: {
-        cardsList: []
+        cardsList: [],
+        statistic: [],
     },
     effects: {
-        * queryList(_, sagaEffects) {
-            const listData = [
-                {
-                    key: 1,
-                    name: 'umi',
-                    desc: '极快的类 Next.js 的 React 应用框架',
-                    url: 'https://umijs.org'
-                },
-                {
-                    key: 2,
-                    name: 'antd',
-                    desc: '一个服务于企业级产品的设计体系',
-                    url: 'https://ant.design/index-cn'
-                },
-                {
-                    key: 3,
-                    name: 'antd-pro',
-                    desc: '一个服务于企业级产品的设计体系',
-                    url: 'https://ant.design/index-cn'
+        * queryList({_}, {call, put}) {
+            const rsp = yield call(cardsService.queryList);
+            console.log('queryList');
+            yield put({type: 'saveList', payload: {cardsList: rsp.result}});
+        },
+        * deleteOne({payload}, {call, put}) {
+            const rsp = yield call(cardsService.deleteOne, payload);
+            console.log("deleteOne");
+            return rsp;
+        },
+        * addOne({payload}, {call, put}) {
+            const rsp = yield call(cardsService.addOne, payload);
+            yield put({type: 'queryList'});
+            return rsp;
+        },
+        * getStatistic({payload}, {call, put}) {
+            const rsp = yield call(cardsService.getStatistic, payload);
+            yield put({
+                    type: 'saveStatistic',
+                    payload: {
+                        id: payload,
+                        data: rsp.result,
+                    },
                 }
-            ];
-            const {call, put} = sagaEffects;
-            yield call(delay, 300);
-            yield put({type: 'initList', payload: listData});
-        }
+            );
+            return rsp;
+        },
     },
     reducers: {
-        initList(state, {payload}) {
-            const cardsList = [...payload];
+        saveList(state, {payload: {cardsList}}) {
+            console.log(cardsList);
             return {
-                cardsList
-            };
-        }
-    }
+                ...state,
+                cardsList,
+            }
+        },
+        saveStatistic(state, {payload: {id, data}}) {
+            console.log(data);
+            return {
+                ...state,
+                statistic: {
+                    ...state.statistic,
+                    [id]: data,
+                },
+            }
+        },
+    },
 };
