@@ -15,7 +15,8 @@ export default {
                 ]
             },
             {path: '/puzzleCards', component: 'PuzzleCardsPage'},
-            {path: 'list', component: 'list'}
+            {path: '/list', component: 'list'},
+            {path: '/hello', component: 'helloWorld/index'}
         ]
     }],
     plugins: [

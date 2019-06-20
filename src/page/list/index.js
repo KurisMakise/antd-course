@@ -10,7 +10,8 @@ class List extends React.Component {
     state = {
         visible: false,
         statisticVisible: false,
-        id: null
+        id: null,
+        prevProps: null,
     };
 
     columns = [
@@ -69,6 +70,7 @@ class List extends React.Component {
     handleStatisticCancel = () => {
         this.setState({
             statisticVisible: false,
+            prevProps: this.props,
         });
     };
 
@@ -143,8 +145,8 @@ class List extends React.Component {
                     </Form>
                 </Modal>
 
-                <Modal visible={statisticVisible} footer={null} onCancel={this.handleStatisticCancel}>
-                    <SampleChart data={statistic[id]}/>
+                <Modal  visible={statisticVisible} footer={null} onCancel={this.handleStatisticCancel}>
+                    <SampleChart data={statistic[id]}   />
                 </Modal>
             </div>
         );
